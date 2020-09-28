@@ -1,4 +1,4 @@
-package com.crisquadros.cursomc.resources.exceptions;
+package com.crisquadros.cursomc.resources.exception;
 
 import java.io.Serializable;
 

@@ -8,4 +8,6 @@ import com.crisquadros.cursomc.resources.domain.Cliente;
 @Repository
 public interface ClienteRepository extends JpaRepository<Cliente, Integer>{
 
+	
+
 }
