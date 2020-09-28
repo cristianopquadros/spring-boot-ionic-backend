@@ -5,15 +5,19 @@ import java.io.Serializable;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
+import org.hibernate.validator.constraints.Length;
+
 import com.crisquadros.cursomc.resources.domain.Cliente;
 
 public class ClienteDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private Integer id;
+	@NotEmpty(message="nome nao pode ser vazio")
+	@Length(message="o tamanho entre 5 e 120 caracteres")
 	private String nome;
 	
-	@NotEmpty
+	@NotEmpty(message="email nao pode ser vazio")
 	@Email(message="digite um email valido")
 	private String email;
 	

@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CollectionTable;
+import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,7 +29,10 @@ public class Cliente implements Serializable{
 	private Integer id;
 	private String nome;
 	private String email;
+	
+	@Column(updatable = false)
 	private String cpfoucnpj;
+	@Column(updatable = false)
 	private Integer tipo;
 	
 	
