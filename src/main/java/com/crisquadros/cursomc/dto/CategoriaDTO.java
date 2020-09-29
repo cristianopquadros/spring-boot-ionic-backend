@@ -3,7 +3,6 @@ package com.crisquadros.cursomc.dto;
 import java.io.Serializable;
 
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Length;
 

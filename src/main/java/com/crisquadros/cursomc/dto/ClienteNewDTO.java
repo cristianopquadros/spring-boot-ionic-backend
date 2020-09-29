@@ -2,23 +2,42 @@ package com.crisquadros.cursomc.dto;
 
 import java.io.Serializable;
 
-public class ClienteNewDTO implements Serializable{
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 
-	
+import org.hibernate.validator.constraints.Length;
+
+import com.crisquadros.cursomc.service.validation.ClienteInsert;
+
+@ClienteInsert
+public class ClienteNewDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 
+	@NotEmpty(message="Preenchimento Obrigatorio")
+	@Length(min=5, max=120, message="o tamanho deve ser entre 5 e 120 caracteres")
 	private String nome;
+	
+	@NotEmpty(message="Preenchimento Obrigatorio")
+	@Email(message="Email invalido")
 	private String email;
-	private String cpfOuCnpj;
+	
+	@NotEmpty(message="Preenchimento Obrigatorio") 
+	private String cpfoucnpj;
+	
 	private Integer tipo;
 	
+	@NotEmpty(message="Preenchimento Obrigatorio")
 	private String logradouro;
 	private String numero;
 	private String complemento;
 	private String bairro;
+	
+	@NotEmpty(message="Preenchimento Obrigatorio")
 	private String cep;
 	
+	@NotEmpty(message="Preenchimento Obrigatorio")
 	private String telefone1;
+	
 	private String telefone2;
 	private String telefone3;
 	
@@ -42,12 +61,12 @@ public class ClienteNewDTO implements Serializable{
 		this.email = email;
 	}
 
-	public String getCpfOuCnpj() {
-		return cpfOuCnpj;
+	public String getcpfoucnpj() {
+		return cpfoucnpj;
 	}
 
-	public void setCpfOuCnpj(String cpfOuCnpj) {
-		this.cpfOuCnpj = cpfOuCnpj;
+	public void setcpfoucnpj(String cpfoucnpj) {
+		this.cpfoucnpj = cpfoucnpj;
 	}
 
 	public Integer getTipo() {
@@ -129,6 +148,7 @@ public class ClienteNewDTO implements Serializable{
 	public void setCidadeId(Integer cidadeId) {
 		this.cidadeId = cidadeId;
 	}
+
 	
 	
 }
