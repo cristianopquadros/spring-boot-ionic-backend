@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import com.crisquadros.cursomc.repositories.ItemPedidoRepository;
 import com.crisquadros.cursomc.repositories.PagamentoRepository;
 import com.crisquadros.cursomc.repositories.PedidoRepository;
-import com.crisquadros.cursomc.repositories.ProdutoRepository;
 import com.crisquadros.cursomc.resources.domain.Categoria;
 import com.crisquadros.cursomc.resources.domain.ItemPedido;
 import com.crisquadros.cursomc.resources.domain.PagamentoComBoleto;
