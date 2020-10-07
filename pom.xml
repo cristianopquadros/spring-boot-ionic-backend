@@ -97,16 +97,15 @@
 <!-- https://mvnrepository.com/artifact/org.hibernate.validator/hibernate-validator-annotation-processor -->
 
 <dependency>
-
-    <groupId>org.hibernate.validator</groupId>
-
-    <artifactId>hibernate-validator-annotation-processor</artifactId>
-
-    <version>6.1.5.Final</version>
-
+	 <groupId>org.hibernate.validator</groupId>
+     <artifactId>hibernate-validator-annotation-processor</artifactId>
+     <version>6.1.5.Final</version>
 </dependency>
 
-
+<dependency>
+	 <groupId>org.springframework.boot</groupId>
+     <artifactId>spring-boot-starter-mail</artifactId>
+</dependency>
 
 	</dependencies>
 	
