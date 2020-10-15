@@ -29,6 +29,7 @@ import com.crisquadros.cursomc.resources.domain.PagamentoComCartao;
 import com.crisquadros.cursomc.resources.domain.Pedido;
 import com.crisquadros.cursomc.resources.domain.Produto;
 import com.crisquadros.cursomc.resources.domain.enums.EstadoPagamento;
+import com.crisquadros.cursomc.resources.domain.enums.Perfil;
 import com.crisquadros.cursomc.resources.domain.enums.TipoCliente;
 
 @Service
@@ -126,16 +127,21 @@ public class DBService {
 		cidadeRepository.saveAll(Arrays.asList(c1, c2, c3));
 		
 		Cliente cli1 = new Cliente(null,"maria silva", "cristianopquadros@gmail.com", ",36378945627", TipoCliente.PESSOAFISICA, pe.encode("123"));
-		
 		cli1.getTelefones().addAll(Arrays.asList("32323232", "99999999"));
+		
+		Cliente cli2 = new Cliente(null,"ana joaquina", "cristiano.quadros@gestao.com.br", ",80253016053", TipoCliente.PESSOAFISICA, pe.encode("321"));
+		cli2.getTelefones().addAll(Arrays.asList("32323232", "99999999"));
+		cli2.addPerfil(Perfil.ADMIN);
 		
 		Endereco e1 = new Endereco(null, "Rua Flores","300", "apto1", "agua verde", "89068400", cli1, c1);
 		Endereco e2 = new Endereco(null, "Rua x","100", "apto12", "verde", "89068400", cli1, c2);
+		Endereco e3 = new Endereco(null, "Rua y","1010", null, "amarelo", "89068400", cli2, c2);
 		
 		cli1.getEnderecos().addAll(Arrays.asList(e1, e2));
+		cli2.getEnderecos().addAll(Arrays.asList(e3));
 		
-		clienteRepository.saveAll(Arrays.asList(cli1));
-		enderecoRepository.saveAll(Arrays.asList(e1,e2));
+		clienteRepository.saveAll(Arrays.asList(cli1, cli2));
+		enderecoRepository.saveAll(Arrays.asList(e1,e2, e3));
 		
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
