@@ -33,11 +33,12 @@ public class Cliente implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
+	
+	@Column(unique=true)
 	private String email;
 	
-	@Column(updatable = false) 
+	@Column(updatable = false, unique=true) 
 	private String cpfoucnpj;
-	@Column(updatable = false)
 	private Integer tipo;
 	
 	@JsonIgnore
