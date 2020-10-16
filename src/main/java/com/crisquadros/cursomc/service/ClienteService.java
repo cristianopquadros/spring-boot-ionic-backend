@@ -20,7 +20,10 @@ import com.crisquadros.cursomc.repositories.EnderecoRepository;
 import com.crisquadros.cursomc.resources.domain.Cidade;
 import com.crisquadros.cursomc.resources.domain.Cliente;
 import com.crisquadros.cursomc.resources.domain.Endereco;
+import com.crisquadros.cursomc.resources.domain.enums.Perfil;
 import com.crisquadros.cursomc.resources.domain.enums.TipoCliente;
+import com.crisquadros.cursomc.security.UserSS;
+import com.crisquadros.cursomc.service.exception.AuthorizationException;
 import com.crisquadros.cursomc.service.exception.DataIntegrityException;
 import com.crisquadros.cursomc.service.exception.ObjectNotFoundException;
 
@@ -43,6 +46,13 @@ public class ClienteService {
 	private EnderecoRepository enderecoRepository;
 	
 	public Optional<Cliente> find(Integer id) {
+		
+		UserSS user = UserService.authenticated();
+		if(user==null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId())) {
+			throw new AuthorizationException("Acesso Negado");
+		}
+		
+		
 		Optional<Cliente> obj = repo.findById(id);	
 		
 		if(obj == null) {
