@@ -56,7 +56,7 @@ public class Cliente implements Serializable{
 	private Set<Integer> perfis  = new HashSet<>();
 	
 	
-	private String imageUrl; 
+	
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "cliente")
@@ -183,15 +183,7 @@ public class Cliente implements Serializable{
 		return true;
 	}
 
-	
-	public String getImageUrl() {
-		return imageUrl;
-	}
 
-	public void setImageUrl(String imageUrl) {
-		this.imageUrl = imageUrl;
-	}
-	
 
 	
 	
