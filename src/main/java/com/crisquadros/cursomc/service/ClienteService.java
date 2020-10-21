@@ -3,7 +3,6 @@ package com.crisquadros.cursomc.service;
 import java.awt.image.BufferedImage;
 import java.net.URI;
 import java.util.List;
-import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -60,7 +59,7 @@ public class ClienteService {
 	private Integer size;
 	
 	
-	public Optional<Cliente> find(Integer id) {
+	public Cliente find(Integer id) {
 		
 		UserSS user = UserService.authenticated();
 		if(user==null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId())) {
@@ -68,7 +67,7 @@ public class ClienteService {
 		}
 		
 		
-		Optional<Cliente> obj = repo.findById(id);	
+		Cliente obj = repo.findById(id).get();	
 		
 		if(obj == null) {
 			throw new ObjectNotFoundException("Objeto nao encontrado id: "+id+", tipo: "+Cliente.class.getName()); 
@@ -86,20 +85,20 @@ public class ClienteService {
 		return obj;
 	}
 
-	
+	/*
 	public Cliente update(Cliente obj) {
 		find(obj.getId());
 		return repo.save(obj);
-	}  
-	
-	/*
+	}  */
 	
 	
-	public Optional<Cliente> update(Optional<Cliente> obj) {
-		Optional<Cliente> newObj = find(obj.get());
+	
+	
+	public Cliente update(Cliente obj) {
+		Cliente newObj = find(obj.getId());
 		updateData(newObj, obj);
-		return repo.saveAll(newObj);
-	} */
+		return repo.save(newObj);
+	} 
 
 	public void delete(Integer id) {
 		find(id);
@@ -111,6 +110,27 @@ public class ClienteService {
 		
 	}
 
+	
+	public Cliente findByEmail(String email) {
+		
+		UserSS user = UserService.authenticated();
+		if(user==null || !user.hasRole(Perfil.ADMIN) && !email.equals(user.getUsername())) {
+			throw new AuthorizationException("Acesso Negado");
+		}
+		
+		
+		Cliente obj = repo.findById(user.getId()).get();	
+		
+		if(obj == null) {
+			throw new ObjectNotFoundException("Objeto nao encontrado id: "+user.getId()+", Tipo: "+Cliente.class.getName()); 
+			
+		}
+		
+		return obj;
+		
+	}
+	
+	
 	public List<Cliente> findAll() {
 		return repo.findAll();
 		
@@ -155,12 +175,12 @@ public class ClienteService {
 		return cli;
 	}
 	
-	/*
+	
 	private void updateData(Cliente newObj, Cliente obj) {
 		newObj.setNome(obj.getNome());
 		newObj.setEmail(obj.getEmail());
 		
-	} */
+	} 
 	
 	public URI uploadProfilePicture(MultipartFile multipartFile) {
 		UserSS user = UserService.authenticated();
