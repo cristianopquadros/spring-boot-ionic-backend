@@ -1,5 +1,7 @@
 package com.crisquadros.cursomc.config;
 
+import java.util.Arrays;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,6 +21,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import com.crisquadros.cursomc.security.JWTAuthenticationFilter;
 import com.crisquadros.cursomc.security.JWTAuthorizationFilter;
 import com.crisquadros.cursomc.security.JWTUtil;
+import com.mysql.cj.x.protobuf.MysqlxCrud.Delete;
 
 @Configuration
 @EnableWebSecurity
@@ -76,8 +79,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Bean
 	CorsConfigurationSource corsConfigurationSource() {
+		CorsConfiguration configuration = new CorsConfiguration().applyPermitDefaultValues();
+		configuration.setAllowedMethods(Arrays.asList("POST", "GET", "PUT", "DELETE", "OPTIONS"));
 		final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-		source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
+		source.registerCorsConfiguration("/**", configuration);
 		return source;
 	}
 	
